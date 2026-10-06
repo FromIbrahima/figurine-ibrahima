@@ -1,0 +1,20 @@
+{#
+    Types de messages :
+      success → vert  (création / modification réussie)
+      danger  → rouge (suppression, erreurs)
+      info    → bleu  (connexion, inscription)
+#}
+{% set flashes = app.flashes(['success', 'danger', 'info']) %}
+
+{% if flashes|filter(messages => messages is not empty) is not empty %}
+    <div class="container flash-stack" role="status" aria-live="polite">
+        {% for type, messages in flashes %}
+            {% for message in messages %}
+                <div class="flash flash--{{ type }}">
+                    <span>{{ message }}</span>
+                    <button type="button" class="flash__close" aria-label="Fermer le message" data-flash-close>&times;</button>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+{% endif %}

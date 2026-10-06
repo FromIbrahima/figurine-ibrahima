@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon profil{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="profile">
+            <aside class="profile-card">
+                <img class="profile-card__avatar" src="{{ asset('uploads/users/' ~ user.imageName) }}" alt="Image de profil de {{ user.firstname }}">
+
+                <h1>{{ user.firstname }} {{ user.lastname }}</h1>
+                <p class="profile-card__email">{{ user.email }}</p>
+
+                {% if user.verified %}
+                    <span class="badge badge--success">E-mail vérifié</span>
+                {% else %}
+                    <span class="badge badge--warning">E-mail non vérifié</span>
+                {% endif %}
+
+                <div class="profile-card__stats">
+                    <div>
+                        <strong>{{ user.figurines|length }}</strong>
+                        <span>figurine{{ user.figurines|length > 1 ? 's' }}</span>
+                    </div>
+                    <div>
+                        <strong>{{ user.createdAt|date('d/m/Y') }}</strong>
+                        <span>membre depuis</span>
+                    </div>
+                </div>
+
+                <a href="{{ path('app_account_edit') }}" class="btn btn--dark btn--block">Éditer mon profil</a>
+            </aside>
+
+            <section>
+                <header class="page-header" style="padding-top: 0;">
+                    <div>
+                        <h2>Mes figurines</h2>
+                        <p>Compte créé le {{ user.createdAt|date('d/m/Y à H:i') }}</p>
+                    </div>
+                    <a href="{{ path('app_figurine_create') }}" class="btn btn--primary">+ Poster une figurine</a>
+                </header>
+
+                {% if user.figurines is not empty %}
+                    <div class="masonry">
+                        {% for figurine in user.figurines %}
+                            {% include 'figurine/_card.html.twig' with {figurine: figurine} only %}
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="empty-state">
+                        <p>Vous n'avez encore publié aucune figurine.</p>
+                        <a href="{{ path('app_figurine_create') }}" class="btn btn--primary">Poster ma première figurine</a>
+                    </div>
+                {% endif %}
+            </section>
+        </div>
+    </div>
+{% endblock %}

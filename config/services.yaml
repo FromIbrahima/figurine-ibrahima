@@ -1,0 +1,15 @@
+# Configuration des services de l'application.
+parameters:
+
+services:
+    _defaults:
+        autowire: true      # Injection automatique des dépendances
+        autoconfigure: true # Enregistrement automatique (commandes, écouteurs, extensions Twig...)
+
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Traits/'
+            - '../src/Kernel.php'

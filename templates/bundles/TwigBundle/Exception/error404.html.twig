@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page introuvable{% endblock %}
+
+{% block body %}
+    <div class="container error-page">
+        <div class="error-page__code">404</div>
+        <h1>Page introuvable</h1>
+        <p>La page ou la figurine que vous recherchez n'existe pas ou a été supprimée.</p>
+        <a href="{{ path('app_home') }}" class="btn btn--primary">Retour à l'accueil</a>
+    </div>
+{% endblock %}

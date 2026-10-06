@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ figurine.title }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="detail">
+            <div class="detail__image">
+                <img src="{{ asset('uploads/figurines/' ~ figurine.imageName) }}" alt="{{ figurine.title }}">
+            </div>
+
+            <div class="detail__info">
+                <h1 class="detail__title">{{ figurine.title }}</h1>
+
+                <span class="detail__price">{{ figurine.price|price }}</span>
+
+                {% if figurine.description %}
+                    <p class="detail__description">{{ figurine.description }}</p>
+                {% else %}
+                    <p class="detail__description detail__description--empty">Aucune description.</p>
+                {% endif %}
+
+                <div class="author">
+                    <img src="{{ asset('uploads/users/' ~ figurine.owner.imageName) }}" alt="">
+                    <div>
+                        <small>Publiée par</small>
+                        <strong>{{ figurine.owner.firstname }} {{ figurine.owner.lastname }}</strong>
+                    </div>
+                </div>
+
+                <dl class="dates">
+                    <div>
+                        <dt>Date de création</dt>
+                        <dd>{{ figurine.createdAt|date('d/m/Y à H:i') }}</dd>
+                    </div>
+                    <div>
+                        <dt>Date de modification</dt>
+                        <dd>{{ figurine.updatedAt|date('d/m/Y à H:i') }}</dd>
+                    </div>
+                </dl>
+
+                <div class="actions">
+                    {% if is_granted('FIGURINE_EDIT', figurine) %}
+                        <a href="{{ path('app_figurine_edit', {id: figurine.id}) }}" class="btn btn--dark">Éditer</a>
+                    {% endif %}
+
+                    {% if is_granted('FIGURINE_DELETE', figurine) %}
+                        <form method="post"
+                              action="{{ path('app_figurine_delete', {id: figurine.id}) }}"
+                              data-confirm="Êtes-vous sûr de vouloir supprimer « {{ figurine.title }} » ? Cette action est irréversible.">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ figurine.id) }}">
+                            <button type="submit" class="btn btn--danger">Supprimer</button>
+                        </form>
+                    {% endif %}
+
+                    <a href="{{ path('app_figurine_index') }}" class="btn btn--outline">← Retour</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

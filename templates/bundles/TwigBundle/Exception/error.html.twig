@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Erreur{% endblock %}
+
+{% block body %}
+    <div class="container error-page">
+        <div class="error-page__code">Oups</div>
+        <h1>Une erreur est survenue</h1>
+        <p>Nous sommes désolés, un problème technique est survenu. Veuillez réessayer plus tard.</p>
+        <a href="{{ path('app_home') }}" class="btn btn--primary">Retour à l'accueil</a>
+    </div>
+{% endblock %}

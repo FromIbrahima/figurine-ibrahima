@@ -1,0 +1,16 @@
+framework:
+    secret: '%env(APP_SECRET)%'
+    default_locale: fr
+    csrf_protection: true
+
+    # Les sessions sont nécessaires pour la connexion et les messages flash.
+    session: true
+
+    form:
+        csrf_protection: true
+
+when@test:
+    framework:
+        test: true
+        session:
+            storage_factory_id: session.storage.factory.mock_file

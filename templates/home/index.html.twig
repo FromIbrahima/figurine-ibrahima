@@ -1,0 +1,155 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+    {# ---------- Bannière principale ---------- #}
+    <section class="hero">
+        <div class="container hero__grid">
+            <div>
+                <span class="hero__eyebrow">✨ La vitrine des collectionneurs</span>
+                <h1 class="hero__title">Vos figurines méritent <em>d'être vues</em>.</h1>
+                <p class="hero__text">
+                    Photographiez vos pièces préférées, partagez-les avec la communauté et
+                    organisez votre collection en un seul endroit. Peintes à la main, imprimées
+                    en 3D ou dénichées en brocante : chaque figurine a son histoire.
+                </p>
+
+                <div class="hero__actions">
+                    {% if app.user %}
+                        <a href="{{ path('app_figurine_index') }}" class="btn btn--primary">Voir les figurines</a>
+                        <a href="{{ path('app_figurine_create') }}" class="btn btn--outline">Poster une figurine</a>
+                    {% else %}
+                        <a href="{{ path('app_register') }}" class="btn btn--primary">Créer mon compte gratuitement</a>
+                        <a href="{{ path('app_login') }}" class="btn btn--outline">Se connecter</a>
+                    {% endif %}
+                </div>
+
+                <div class="hero__stats">
+                    <div><strong>{{ figurineCount }}</strong><span>figurines partagées</span></div>
+                    <div><strong>100 %</strong><span>gratuit</span></div>
+                    <div><strong>5 Mo</strong><span>par photo</span></div>
+                </div>
+            </div>
+
+            <div class="hero__collage" aria-hidden="true">
+                {% for image in ['figurine-01', 'figurine-04', 'figurine-05', 'figurine-08', 'figurine-11', 'figurine-06'] %}
+                    <img src="{{ asset('images/home/' ~ image ~ '.png') }}" alt="" loading="lazy">
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    {# ---------- Fonctionnalités ---------- #}
+    <section class="section">
+        <div class="container">
+            <div class="section__head">
+                <h2>Tout ce qu'il faut pour votre collection</h2>
+                <p>Une application simple, pensée pour les passionnés de figurines de tous horizons.</p>
+            </div>
+
+            <div class="features">
+                <article class="feature">
+                    <div class="feature__icon">📸</div>
+                    <h3>Partagez</h3>
+                    <p>Publiez la photo de chaque figurine avec un titre, une description et sa valeur estimée en euros.</p>
+                </article>
+                <article class="feature">
+                    <div class="feature__icon">🗂️</div>
+                    <h3>Organisez</h3>
+                    <p>Retrouvez toutes vos pièces dans une grille claire, modifiez-les ou retirez-les quand vous le souhaitez.</p>
+                </article>
+                <article class="feature">
+                    <div class="feature__icon">🔍</div>
+                    <h3>Découvrez</h3>
+                    <p>Parcourez les collections des autres membres et inspirez-vous de leurs plus belles réalisations.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    {# ---------- Comment ça marche ---------- #}
+    <section class="section section--dark">
+        <div class="container">
+            <div class="section__head">
+                <h2>Comment ça marche ?</h2>
+                <p>Trois étapes suffisent pour exposer votre première figurine.</p>
+            </div>
+
+            <div class="steps">
+                <div class="step">
+                    <h3>Inscrivez-vous</h3>
+                    <p>Prénom, nom, e-mail et mot de passe : votre compte est prêt en moins d'une minute.</p>
+                </div>
+                <div class="step">
+                    <h3>Postez une figurine</h3>
+                    <p>Ajoutez une photo, un titre et un prix. Votre figurine apparaît aussitôt dans la galerie.</p>
+                </div>
+                <div class="step">
+                    <h3>Gérez votre vitrine</h3>
+                    <p>Modifiez ou supprimez vos figurines à tout moment et personnalisez votre profil.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# ---------- Mise en avant ---------- #}
+    <section class="section">
+        <div class="container showcase">
+            <div class="showcase__media">
+                <img src="{{ asset('images/home/figurine-05.png') }}" alt="Figurine de samouraï en armure rouge sur son socle" loading="lazy">
+                <div class="showcase__badge">
+                    Samouraï écarlate
+                    <small>Publiée par un membre</small>
+                </div>
+            </div>
+
+            <div>
+                <h2>Une galerie qui met vos pièces en valeur</h2>
+                <p class="hero__text">
+                    Les figurines sont présentées en grille façon mosaïque, avec leur prix,
+                    leur auteur et la date de publication. Un clic sur l'image ouvre la fiche détaillée.
+                </p>
+                <ul class="checklist">
+                    <li>Photos en haute qualité, jusqu'à 600 px de large sur la fiche</li>
+                    <li>Seul le propriétaire peut modifier ou supprimer sa figurine</li>
+                    <li>Galerie réservée aux membres connectés</li>
+                </ul>
+                <a href="{{ path(app.user ? 'app_figurine_index' : 'app_register') }}" class="btn btn--dark">
+                    {{ app.user ? 'Parcourir la galerie' : 'Rejoindre la communauté' }}
+                </a>
+            </div>
+        </div>
+    </section>
+
+    {# ---------- Dernières figurines (membres connectés uniquement) ---------- #}
+    {% if latestFigurines is not empty %}
+        <section class="section" style="padding-top: 0;">
+            <div class="container">
+                <div class="section__head">
+                    <h2>Les dernières figurines</h2>
+                    <p>Les pièces publiées le plus récemment par la communauté.</p>
+                </div>
+
+                <div class="masonry">
+                    {% for figurine in latestFigurines %}
+                        {% include 'figurine/_card.html.twig' with {figurine: figurine} only %}
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+    {# ---------- Appel à l'action ---------- #}
+    {% if not app.user %}
+        <section class="section" style="padding-top: 0;">
+            <div class="container">
+                <div class="cta">
+                    <h2>Prêt à exposer votre collection ?</h2>
+                    <p>Créez votre compte et publiez votre première figurine dès aujourd'hui. Les figurines sont visibles uniquement par les membres connectés.</p>
+                    <a href="{{ path('app_register') }}" class="btn btn--light">Je m'inscris</a>
+                </div>
+            </div>
+        </section>
+    {% endif %}
+{% endblock %}

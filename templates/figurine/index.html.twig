@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les figurines{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <header class="page-header">
+            <div>
+                <h1>Les figurines</h1>
+                <p>{{ figurines|length }} figurine{{ figurines|length > 1 ? 's' }} partagée{{ figurines|length > 1 ? 's' }} par la communauté</p>
+            </div>
+            <a href="{{ path('app_figurine_create') }}" class="btn btn--primary">+ Poster une figurine</a>
+        </header>
+
+        {% if figurines is not empty %}
+            <div class="masonry">
+                {% for figurine in figurines %}
+                    {% include 'figurine/_card.html.twig' with {figurine: figurine} only %}
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="empty-state">
+                <h2>Aucune figurine pour le moment</h2>
+                <p>Soyez le premier à partager une pièce de votre collection !</p>
+                <a href="{{ path('app_figurine_create') }}" class="btn btn--primary">Poster une figurine</a>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

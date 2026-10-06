@@ -1,0 +1,39 @@
+<footer class="footer">
+    <div class="container">
+        <div class="footer__grid">
+            <div>
+                <div class="footer__brand">
+                    <img src="{{ asset('images/logo.svg') }}" alt="">
+                    <span>{{ site_name }}</span>
+                </div>
+                <p>La vitrine des collectionneurs : partagez vos figurines, organisez votre collection et découvrez celles des autres passionnés.</p>
+            </div>
+
+            <div>
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="{{ path('app_home') }}">Accueil</a></li>
+                    {% if app.user %}
+                        <li><a href="{{ path('app_figurine_index') }}">Figurines</a></li>
+                        <li><a href="{{ path('app_figurine_create') }}">Poster une figurine</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+
+            <div>
+                <h4>Mon compte</h4>
+                <ul>
+                    {% if app.user %}
+                        <li><a href="{{ path('app_account') }}">Mon profil</a></li>
+                        <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>
+                    {% else %}
+                        <li><a href="{{ path('app_register') }}">S'inscrire</a></li>
+                        <li><a href="{{ path('app_login') }}">Se connecter</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+
+        <p class="footer__bottom">&copy; {{ 'now'|date('Y') }} {{ site_name }} – Projet réalisé par Ibrahima · CFITECH</p>
+    </div>
+</footer>

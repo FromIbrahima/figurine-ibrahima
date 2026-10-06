@@ -1,0 +1,27 @@
+{# Carte d'une figurine dans la grille (image 250 px, titre limité à 30 caractères) #}
+<article class="figurine-card">
+    <a href="{{ path('app_figurine_show', {id: figurine.id}) }}" class="figurine-card__image">
+        <img src="{{ asset('uploads/figurines/' ~ figurine.imageName) }}"
+             alt="{{ figurine.title }}"
+             width="250"
+             loading="lazy">
+    </a>
+
+    <div class="figurine-card__body">
+        <a href="{{ path('app_figurine_show', {id: figurine.id}) }}" class="figurine-card__title" title="{{ figurine.title }}">
+            {{ figurine.title|truncate(30) }}
+        </a>
+
+        <span class="figurine-card__price">{{ figurine.price|price }}</span>
+
+        <div class="figurine-card__meta">
+            <img src="{{ asset('uploads/users/' ~ figurine.owner.imageName) }}" alt="">
+            <div>
+                <strong>{{ figurine.owner.firstname }} {{ figurine.owner.lastname }}</strong>
+                <time datetime="{{ figurine.createdAt|date('c') }}" title="{{ figurine.createdAt|date('d/m/Y à H:i') }}">
+                    Publiée {{ figurine.createdAt|time_ago }}
+                </time>
+            </div>
+        </div>
+    </div>
+</article>

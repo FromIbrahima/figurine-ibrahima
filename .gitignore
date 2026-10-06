@@ -1,0 +1,16 @@
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+# Images téléversées par les utilisateurs
+/public/uploads/figurines/*
+!/public/uploads/figurines/.gitkeep
+/public/uploads/users/*
+!/public/uploads/users/.gitkeep
+!/public/uploads/users/default-avatar.png

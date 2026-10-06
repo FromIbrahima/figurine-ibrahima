@@ -1,0 +1,14 @@
+<h1>Bonjour {{ user.firstname }} !</h1>
+
+<p>
+    Merci pour votre inscription sur FiguriThèque. Pour confirmer votre adresse e-mail,
+    cliquez sur le lien ci-dessous :
+</p>
+
+<p>
+    <a href="{{ signedUrl|raw }}">Confirmer mon adresse e-mail</a>
+</p>
+
+<p>Ce lien expirera dans {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.</p>
+
+<p>À très bientôt,<br>L'équipe FiguriThèque</p>

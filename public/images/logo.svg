@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="FiguriThèque">
+  <rect width="64" height="64" rx="16" fill="#1f1d36"/>
+  <ellipse cx="32" cy="52" rx="17" ry="4.5" fill="#e8a33d"/>
+  <rect x="15" y="46" width="34" height="6" fill="#e8a33d"/>
+  <ellipse cx="32" cy="46" rx="17" ry="4.5" fill="#f6c46b"/>
+  <rect x="24" y="27" width="16" height="17" rx="5" fill="#ff6b57"/>
+  <circle cx="32" cy="19" r="9" fill="#ffe2c6"/>
+  <circle cx="29" cy="19" r="1.6" fill="#1f1d36"/>
+  <circle cx="35" cy="19" r="1.6" fill="#1f1d36"/>
+  <path d="M22 15 Q32 3 42 15 Z" fill="#7b6cf6"/>
+</svg>

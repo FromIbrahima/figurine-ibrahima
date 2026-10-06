@@ -1,0 +1,15 @@
+{{ form_start(form, {attr: {novalidate: 'novalidate'}}) }}
+    {{ form_errors(form) }}
+
+    {{ form_row(form.title) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.price) }}
+    {{ form_row(form.imageFile) }}
+
+    {{ form_rest(form) }}
+
+    <div class="actions">
+        <button type="submit" class="btn btn--primary">{{ button_label }}</button>
+        <a href="{{ cancel_path }}" class="btn btn--ghost">Annuler</a>
+    </div>
+{{ form_end(form) }}

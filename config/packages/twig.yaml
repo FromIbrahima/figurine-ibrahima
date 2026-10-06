@@ -1,0 +1,9 @@
+twig:
+    file_name_pattern: '*.twig'
+    form_themes: ['partials/_form_theme.html.twig']
+    globals:
+        site_name: 'FiguriThèque'
+
+when@test:
+    twig:
+        strict_variables: true

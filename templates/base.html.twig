@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="{% block meta_description %}Partagez et organisez les photos de vos figurines.{% endblock %}">
+        <title>{% block title %}Bienvenue{% endblock %} | {{ site_name }}</title>
+        <link rel="icon" type="image/svg+xml" href="{{ asset('images/logo.svg') }}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        {% block stylesheets %}{% endblock %}
+        <script src="{{ asset('js/app.js') }}" defer></script>
+        {% block javascripts %}{% endblock %}
+    </head>
+    <body>
+        {% include 'partials/_navbar.html.twig' %}
+
+        <main class="main">
+            {% include 'partials/_flash_messages.html.twig' %}
+
+            {% block body %}{% endblock %}
+        </main>
+
+        {% include 'partials/_footer.html.twig' %}
+    </body>
+</html>

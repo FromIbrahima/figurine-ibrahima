@@ -1,0 +1,45 @@
+{% set current_route = app.request.attributes.get('_route') ?? '' %}
+
+<header class="navbar">
+    <nav class="container navbar__inner" aria-label="Navigation principale">
+        <a href="{{ path('app_home') }}" class="navbar__brand">
+            <img src="{{ asset('images/logo.svg') }}" alt="">
+            <span>{{ site_name }}</span>
+        </a>
+
+        <button class="navbar__toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" data-nav-toggle>
+            <span></span><span></span><span></span>
+        </button>
+
+        <ul class="navbar__menu" data-nav-menu>
+            <li>
+                <a href="{{ path('app_home') }}" class="navbar__link {{ current_route == 'app_home' ? 'is-active' }}">Accueil</a>
+            </li>
+
+            {% if app.user %}
+                <li>
+                    <a href="{{ path('app_figurine_index') }}" class="navbar__link {{ current_route in ['app_figurine_index', 'app_figurine_show', 'app_figurine_edit'] ? 'is-active' }}">Figurines</a>
+                </li>
+                <li>
+                    <a href="{{ path('app_figurine_create') }}" class="navbar__link navbar__link--cta {{ current_route == 'app_figurine_create' ? 'is-active' }}">Poster une figurine</a>
+                </li>
+                <li>
+                    <a href="{{ path('app_account') }}" class="navbar__link {{ current_route starts with 'app_account' ? 'is-active' }}">
+                        <img class="navbar__avatar" src="{{ asset('uploads/users/' ~ app.user.imageName) }}" alt="">
+                        Mon profil
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('app_logout') }}" class="navbar__link">Déconnexion</a>
+                </li>
+            {% else %}
+                <li>
+                    <a href="{{ path('app_register') }}" class="navbar__link {{ current_route == 'app_register' ? 'is-active' }}">S'inscrire</a>
+                </li>
+                <li>
+                    <a href="{{ path('app_login') }}" class="navbar__link navbar__link--cta {{ current_route == 'app_login' ? 'is-active' }}">Se connecter</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>

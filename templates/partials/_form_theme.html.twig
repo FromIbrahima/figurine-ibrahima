@@ -1,0 +1,36 @@
+{# Thème de formulaire de l'application : erreurs affichées en rouge sous chaque champ #}
+{% use 'form_div_layout.html.twig' %}
+
+{% block form_row %}
+    {%- set widget_attr = {} -%}
+    {%- if help is not empty -%}
+        {%- set widget_attr = {attr: {'aria-describedby': id ~ '_help'}} -%}
+    {%- endif -%}
+    <div class="form-group{% if errors|length > 0 %} has-error{% endif %}">
+        {{- form_label(form) -}}
+        {{- form_widget(form, widget_attr) -}}
+        {{- form_help(form) -}}
+        {{- form_errors(form) -}}
+    </div>
+{% endblock form_row %}
+
+{% block form_label %}
+    {%- set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' form-label')|trim}) -%}
+    {{- parent() -}}
+{% endblock form_label %}
+
+{% block form_help %}
+    {%- if help is not empty -%}
+        <p id="{{ id }}_help" class="form-help">{{ help|trans(help_translation_parameters, translation_domain) }}</p>
+    {%- endif -%}
+{% endblock form_help %}
+
+{% block form_errors %}
+    {%- if errors|length > 0 -%}
+        <ul class="form-errors{% if form.parent is null %} form-errors--global{% endif %}">
+            {%- for error in errors -%}
+                <li>{{ error.message }}</li>
+            {%- endfor -%}
+        </ul>
+    {%- endif -%}
+{% endblock form_errors %}

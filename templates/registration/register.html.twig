@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="form-page form-page--narrow">
+            <div class="form-card">
+                <h1 class="form-card__title">Créer un compte</h1>
+                <p class="form-card__subtitle">Rejoignez la communauté et partagez vos figurines.</p>
+
+                {{ form_start(registrationForm, {attr: {novalidate: 'novalidate'}}) }}
+                    {{ form_errors(registrationForm) }}
+
+                    <div class="form-row-2">
+                        {{ form_row(registrationForm.firstname) }}
+                        {{ form_row(registrationForm.lastname) }}
+                    </div>
+                    {{ form_row(registrationForm.email) }}
+                    {{ form_row(registrationForm.plainPassword) }}
+
+                    {{ form_rest(registrationForm) }}
+
+                    <button type="submit" class="btn btn--primary btn--block">S'inscrire</button>
+                {{ form_end(registrationForm) }}
+
+                <p class="form-footer">Déjà inscrit ? <a href="{{ path('app_login') }}">Se connecter</a></p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
